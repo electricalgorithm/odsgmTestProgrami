@@ -6,10 +6,14 @@ import pandas;
 
 def derslerKodCevirici(kod):
     return {
-        'b': "biyoloji",
-        'k': "kimya",
-        'f': "fizik",
-        'm': "matematik"
+        'bm': "biyolojiMezun",
+        'km': "kimyaMezun",
+        'fm': "fizikMezun",
+        'mm': "matematikMezun",
+	'k11': "kimya11",
+	'k10': "kimya10",
+	'f11': "fizik11",
+	'b11': "biyoloji11";
     }.get(kod, "HATA");
 
 def cevapAnahtari(ders, test):
@@ -81,8 +85,8 @@ while (True):
 
     # Programdan çıkış için tanımlanmış komut:
     if (dersTest == "kapat"): break;
-    # Ders kodu ve soru sayısının toplam karakter sayısı -> B:12'dir. -> 4 karakter.
-    if (len(dersTest) > 4):
+    # Ders kodu ve soru sayısının toplam karakter sayısı -> B11:12'dir. -> 4 karakter.
+    if (len(dersTest) > 5):
         print("\n\tGirdiğiniz komutta hata vardır. Lütfen tekrar deneyiniz.\n");
         continue;
     # Eğer dersTest'teki test sayısı, integer değilse hata verecek:
