@@ -10,7 +10,7 @@ def derslerKodCevirici(kod):
         'km': "kimyaMezun",
         'fm': "fizikMezun",
         'mm': "matematikMezun",
-	    'k11': "kimya11",
+	'k11': "kimya11",
         'k10': "kimya10",
         'f11': "fizik11",
         'b11': "biyoloji11"
