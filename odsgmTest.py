@@ -10,10 +10,10 @@ def derslerKodCevirici(kod):
         'km': "kimyaMezun",
         'fm': "fizikMezun",
         'mm': "matematikMezun",
-	'k11': "kimya11",
-	'k10': "kimya10",
-	'f11': "fizik11",
-	'b11': "biyoloji11"
+	    'k11': "kimya11",
+        'k10': "kimya10",
+        'f11': "fizik11",
+        'b11': "biyoloji11"
     }.get(kod, "HATA");
 
 def cevapAnahtari(ders, test):
@@ -89,10 +89,12 @@ while (True):
     if (len(dersTest) > 5):
         print("\n\tGirdiğiniz komutta hata vardır. Lütfen tekrar deneyiniz.\n");
         continue;
+
     # Eğer dersTest'teki test sayısı, integer değilse hata verecek:
     try:
+        dersTest = dersTest.split(':');
         dersKodu = dersTest[0];
-        testSayisi = int(dersTest[2::]);
+        testSayisi = int(dersTest[1]);
         print("\nCevap girme formatı: ABCDEAACDE (...)")
         print("Cevabını bilmediğiniz soru için 'O' giriniz.")
         yanitlar = input("\nCevaplarınızı giriniz ~> ").upper();
