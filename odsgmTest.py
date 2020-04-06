@@ -13,7 +13,7 @@ def derslerKodCevirici(kod):
 	'k11': "kimya11",
 	'k10': "kimya10",
 	'f11': "fizik11",
-	'b11': "biyoloji11";
+	'b11': "biyoloji11"
     }.get(kod, "HATA");
 
 def cevapAnahtari(ders, test):
