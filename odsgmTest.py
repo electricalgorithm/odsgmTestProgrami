@@ -1,8 +1,9 @@
 # License: MPL-v2
 # Made by github.com/electricalgorithm
-
 import tabula;
 import pandas;
+from datetime import datetime;
+from datetime import timedelta;
 
 def derslerKodCevirici(kod):
     return {
@@ -30,7 +31,7 @@ def cevapAnahtari(ders, test):
             print("\n\tHATA:Girdiğiniz test sayısına ait bir test bulunamadı.\n")
             print(err);
 
-def kontrol(cevaplar, cevapanahtari):
+def kontrol(cevaplar, cevapanahtari, gecenSure):
     # Cevap anahtarından gelen değerleri düzeltmek için:
     for index in cevapanahtari:
         if (pandas.isnull(index)):
@@ -64,20 +65,41 @@ def kontrol(cevaplar, cevapanahtari):
                 gercekDeger = cevapanahtari[index];
                 yanitDeger = cevaplar[index];
                 print(f"\t# Soru {soruSayisi} yanlış! Yanıt: {yanitDeger}, Doğrusu: {gercekDeger}");
-    print("-"*10);
-    print(f"Doğru sayısı: {dogruSayisi}, Yanlış sayısı: {yanlisSayisi}, Boş sayısı: {bosSayisi}");
-    print("## -> Net:", (dogruSayisi - yanlisSayisi/4), "  -> Doğruluk yüzdesi: %", (dogruSayisi*100/len(cevapanahtari)), "\n");
+
+    # Test sonuçlarının yazdılırma kısmı aşağıdadır.
+    cvpAnahtariSoruSayisi = len(cevapanahtari);
+    dogrulukYuzdesi = round(dogruSayisi*100/cvpAnahtariSoruSayisi, 2);
+    ortalamaSure = round(gecenSure.total_seconds()/cvpAnahtariSoruSayisi, 2);
+    netMiktarı = dogruSayisi - yanlisSayisi/4;
+    print(f"""
+    {"-"*10}Test Sonuçları{"-"*10}
+    * Doğru Sayısı: {dogruSayisi}, Yanlış Sayısı: {yanlisSayisi}, Boş sayısı: {bosSayisi}
+    * ---- Netiniz: {netMiktarı}
+    * ---- Doğruluk yüzdeniz: %{dogrulukYuzdesi}
+
+    * {cvpAnahtariSoruSayisi} soruluk testi çözmek için harcadığınız süre: {gecenSure}
+    * ---- Soru başı harcanan ortalama süre: {ortalamaSure} saniye
+    """);
 
 
-print("""
-# -------------------------------- #
-# ------ Kazanım Testleri Çözücü - #
-# -------------------------------- #
-# Bu program ile ÖDSGM'nin sitesi- #
-# nde yer alan testleri çözebilir  #
-# ve kontrol ettirebilirsiniz.     #
-# -------------------------------  #
-#   Çıkmak için "kapat" yazınız.   #
+print(f"""
+{"-"*35}
+|     Kazanım Testleri Çözücü     |
+|  -  -  -  -  -  -  -  -  -  -   |
+|Bu program, MEB'e bağlı ODSGM ta-|
+|rafından yayınlanan testlerin ce-|
+|vap anahtarına bakılarak kontrol |
+|edilmesinin zorluğunu gidermek   |
+|adına yazılmıştır. Benim gibi tüm|
+|öğrencilere yararlı olması dileği|
+|ile...                           |
+|                                 |
+| Lisans: MPL-2.0                 |
+| Fikir sahibi: electricalgorithm |
+|                                 |
+| Programdan çıkmak için "kapat"  |
+| komutunu girebilirsiniz.        |
+{"-"*35}
 """);
 
 while (True):
@@ -95,11 +117,15 @@ while (True):
         dersTest = dersTest.split(':');
         dersKodu = dersTest[0];
         testSayisi = int(dersTest[1]);
-        print("\nCevap girme formatı: ABCDEAACDE (...)")
-        print("Cevabını bilmediğiniz soru için 'O' giriniz.")
+        print("\n## Cevap girme formatı: ABCDEAACDE (...)")
+        print("## Cevabını bilmediğiniz soru için 'O' giriniz.")
+        # Süre burada başlatılacaktır.
+        baslangicZamani = datetime.now()
         yanitlar = input("\nCevaplarınızı giriniz ~> ").upper();
+        bitisZamani = datetime.now();
+        # Süre burada bitirilecektir.
         yanitListesi = list(yanitlar);
-        kontrol(yanitListesi, cevapAnahtari(dersKodu, testSayisi));
+        kontrol(yanitListesi, cevapAnahtari(dersKodu, testSayisi), (bitisZamani - baslangicZamani));
     except ValueError as err:
         print("\n\tGirdiğiniz komutta hata vardır. Lütfen tekrar deneyiniz.\n");
         print(err);
