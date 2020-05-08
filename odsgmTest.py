@@ -97,6 +97,11 @@ print(f"""
 | Lisans: MPL-2.0                 |
 | Fikir sahibi: electricalgorithm |
 |                                 |
+| # Test Kodları                  |
+| "[ders baş harfi]+[sınıf]"      |
+| örn. bm -> Biyoloji Mezun       |
+|      f11 -> Fizik 11. Sınıf     |
+|                                 |
 | Programdan çıkmak için "kapat"  |
 | komutunu girebilirsiniz.        |
 {"-"*35}
